@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animal World", "Animal World\Animal World.csproj", "{B142C2A3-6E69-4B2C-8FD0-6AC173FBE37A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactory", "AbstractFactory\AbstractFactory.csproj", "{5B3AB228-01B0-4471-8BA9-DD1BDA62A15C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B142C2A3-6E69-4B2C-8FD0-6AC173FBE37A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B142C2A3-6E69-4B2C-8FD0-6AC173FBE37A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B142C2A3-6E69-4B2C-8FD0-6AC173FBE37A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B142C2A3-6E69-4B2C-8FD0-6AC173FBE37A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3AB228-01B0-4471-8BA9-DD1BDA62A15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3AB228-01B0-4471-8BA9-DD1BDA62A15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3AB228-01B0-4471-8BA9-DD1BDA62A15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3AB228-01B0-4471-8BA9-DD1BDA62A15C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E79B16CE-3684-4CD5-9DE7-E5F273BB5425}
+	EndGlobalSection
+EndGlobal

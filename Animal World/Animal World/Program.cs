@@ -1,15 +1,15 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace Animal_World
 {
-    public abstract class Game
+    class Program
     {
-
-        public abstract  Figure Create();
+        static void Main(string[] args)
+        {
+        }
     }
 }

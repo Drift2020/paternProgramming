@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Figure_;
-namespace T_Figure_
+
+namespace ConsoleApp1
 {
     public class T_Figure : Figure
     {
@@ -14,6 +14,8 @@ namespace T_Figure_
             setColor();
             setSize();
         }
+
+      
 
         override public void setName()
         {
