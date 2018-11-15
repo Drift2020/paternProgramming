@@ -25,15 +25,9 @@ namespace AbstractFactory
         protected int Weight;
         protected bool Life=true;
         public abstract void Eat_grass();
+        public abstract int Weight(); 
         public abstract void Set_Life(bool elem);
     }
-
-    public abstract class Carnivore
-    {
-        protected int Power;
-        public abstract void Eat();
-    }
-
     public class Wildebeest : Herbivore
     {
         public override void Set_Life(bool elem)
@@ -46,4 +40,25 @@ namespace AbstractFactory
             this.Weight += 10;
         }
     }
+
+
+    public abstract class Carnivore
+    {
+        protected int Power;
+        public abstract void Eat();
+    }
+
+    public class Wolf : Carnivore
+    {
+        public override void Eat()
+        {
+
+        }
+    }
+
+
+  
+
+
+    
 }
