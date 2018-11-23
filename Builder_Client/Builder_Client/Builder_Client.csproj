@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B142C2A3-6E69-4B2C-8FD0-6AC173FBE37A}</ProjectGuid>
+    <ProjectGuid>{BCBBA141-7BDE-4874-BF28-8A37355ABD00}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Animal_World</RootNamespace>
-    <AssemblyName>Animal World</AssemblyName>
+    <RootNamespace>Builder_Client</RootNamespace>
+    <AssemblyName>Builder_Client</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AbstractFactory">
-      <HintPath>..\AbstractFactory\bin\Debug\AbstractFactory.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
