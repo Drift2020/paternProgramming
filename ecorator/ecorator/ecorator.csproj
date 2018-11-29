@@ -43,11 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\Being.cs" />
+    <Compile Include="Component\Being_Magic.cs" />
+    <Compile Include="ConcreteComponent\Elf.cs" />
+    <Compile Include="ConcreteComponent\Human.cs" />
+    <Compile Include="ConcreteDecorator\Archer.cs" />
+    <Compile Include="ConcreteDecorator\Crossbowman.cs" />
+    <Compile Include="ConcreteDecorator\Elf_magician.cs" />
+    <Compile Include="ConcreteDecorator\Elf_warrior.cs" />
+    <Compile Include="ConcreteDecorator\Evil_magician.cs" />
+    <Compile Include="ConcreteDecorator\Good_magician.cs" />
+    <Compile Include="ConcreteDecorator\Human_Warrior.cs" />
+    <Compile Include="ConcreteDecorator\Rider.cs" />
+    <Compile Include="ConcreteDecorator\Swordsman.cs" />
+    <Compile Include="Decorator\Profession.cs" />
+    <Compile Include="Decorator\Profession_Magic.cs" />
+    <Compile Include="Interface\AllMessage.cs" />
+    <Compile Include="Interface\Allread.cs" />
+    <Compile Include="Interface\ConsoleRead.cs" />
+    <Compile Include="Interface\ConsoleWriter.cs" />
+    <Compile Include="Interface\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
