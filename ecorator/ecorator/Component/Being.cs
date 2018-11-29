@@ -23,6 +23,15 @@ namespace ecorator.Component
         public int Damage { get; protected set; }
         public int Defense { get; protected set; }
 
+        public string NameF()
+        {
+            return Name;
+        }
+        public int HitpontsF() { return Hitponts; }
+        public int SpeedF() { return Speed; }
+        public int DamageF() { return Damage; }
+        public int DefenseF() { return Defense; }
+
         //public abstract int Move_Speed();
         //public abstract int Move_Hitpoints();
         //public abstract int Move_Damage();

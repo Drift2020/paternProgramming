@@ -8,6 +8,10 @@ namespace ecorator
 {
     interface Player
     {
-       
+         string NameF();
+         int HitpontsF();
+        int SpeedF();
+        int DamageF();
+        int DefenseF();
     }
 }

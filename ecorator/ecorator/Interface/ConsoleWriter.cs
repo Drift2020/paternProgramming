@@ -11,9 +11,13 @@ namespace ecorator
         public ConsoleWriter()
         {
             consoleWrite = MyConsol;
+            consoleWriteN = MyConsol_n;
+            consoleClean = MyConsolClear;
         }
 
         Message consoleWrite;
+        Message consoleWriteN;
+        Clean consoleClean;
         public Message Write
         {
             set
@@ -25,13 +29,40 @@ namespace ecorator
                 return consoleWrite;
             }
         }
+        public Message Write_n
+        {
+            set
+            {
+                consoleWriteN = value;
+            }
+            get
+            {
+                return consoleWriteN;
+            }
+        }
+        public Clean clean
+        {
+            set
+            {
+                consoleClean = value;
+            }
+            get
+            {
+                return consoleClean;
+            }
+        }
         void MyConsol(string str)
         {
-            Console.WriteLine(str);
+            Console.Write(str);
          
         }
+        void MyConsol_n(string str)
+        {
+            Console.WriteLine(str);
 
-        void MyConsolClear(string str)
+        }
+
+        void MyConsolClear()
         {
             Console.Clear();
 
