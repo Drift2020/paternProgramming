@@ -21,33 +21,27 @@ namespace Composite
                 my_tree = new List<Root>();
                 map_in_my_tree = new List<string>();
 
-                Root root = new Room("root",0,new ConsoleWriter());
+                Root root = new Room("Приемная", 10, my_Write);
 
-                root.Add(new Room("File A", 0, new ConsoleWriter()), new string[] { "1" });
-                root.Add(new Room("File B", 0, new ConsoleWriter()), new string[] { "1" });
+                root.Add(new Statistic("Должна быть выполнена в теплых тонах", 10, my_Write), new string[] { "1" });
 
-                Root comp = new Room("Folder X", 0, new ConsoleWriter());
+                Root Table_1 = new Table("Журнальный столик", 10, new ConsoleWriter());
+                Table_1.Add(new Statistic("10-20 журналов типа «компьютерный мир» ", 10, my_Write), new string[] { "1" });
+                root.Add(Table_1, new string[] { "1" });
 
-                comp.Add(new Room("File XA", 0, new ConsoleWriter()), new string[] { "1" });
-                comp.Add(new Room("File XB", 0, new ConsoleWriter()), new string[] { "1" });
-                root.Add(comp, new string[] { "1" });
+                root.Add(new Statistic("Мягкий диван ", 10, my_Write), new string[] { "1" });
 
-                Root comp2 = new Room("Folder Y", 0, new ConsoleWriter());
+               Root Table_2 = new Table("Стол секретаря ", 10, my_Write);
+               Root PC_1 = new PC("Компьютер", 10, new ConsoleWriter());
+                PC_1.Add(new Statistic("Важно наличие большого объема жесткого диска", 10, my_Write), new string[] { "1" });
 
-                comp2.Add(new Room("File YA", 0, new ConsoleWriter()), new string[] { "1" });
-                comp2.Add(new Room("File YB", 0, new ConsoleWriter()), new string[] { "1" });
+                Table_2.Add(PC_1, new string[] { "1" });
+                Table_2.Add(new Statistic("Офисный инструментарий ", 10, my_Write), new string[] { "1" });
 
-                Root comp3 = new Room("Folder Z", 0, new ConsoleWriter());
-                comp3.Add(new Room("File YZA", 0, new ConsoleWriter()), new string[] { "1" });
-                comp3.Add(new Room("File YZB", 0, new ConsoleWriter()), new string[] { "1" });
-                comp2.Add(comp3, new string[] { "1" });
+                root.Add(Table_2, new string[] { "1" });
+                root.Add(new Statistic("Кулер с теплой и холодной водой", 10, my_Write), new string[] { "1" });
+              
 
-                root.Add(comp2, new string[] { "1" });
-
-                root.Add(new Room("File C", 0, new ConsoleWriter()), new string[] { "1" });
-
-                Root leaf = new Room("File D", 0, new ConsoleWriter());
-                root.Add(leaf, new string[] { "1" });
                 my_tree.Add(root);
             }
             List<Root> my_tree;
@@ -63,36 +57,31 @@ namespace Composite
                     {
                         case My_type.Statistic:
                             {
-                                if (my_tree[number - 1] is Statistic)
-                                    my_Write.Write("Can't add in this elem");
-                                else
+                             
                                     my_tree[number - 1].Add(new Statistic(elem, my_price, new ConsoleWriter()), map_in_my_tree.ToArray());
                             }
                             break;
                         case My_type.PC:
                             {
-                                if (my_tree[number - 1] is Table)
+                               
                                     my_tree[number - 1].Add(new PC(elem, my_price, new ConsoleWriter()), map_in_my_tree.ToArray());
-                                else
-                                    my_Write.Write("Can't add in this elem");
+                             
 
                             }
                             break;
                      
                         case My_type.Table:
                             {
-                                if (my_tree[number - 1] is Room)
+                              
                                     my_tree[number - 1].Add(new Table(elem, my_price, new ConsoleWriter()), map_in_my_tree.ToArray());
-                                else
-                                    my_Write.Write("Can't add in this elem");
+                              
                             }
                             break;
                         case My_type.Board:
                             {
-                                if (my_tree[number - 1] is Room)
+                             
                                     my_tree[number - 1].Add(new Board(elem, my_price, new ConsoleWriter()), map_in_my_tree.ToArray());
-                                else
-                                    my_Write.Write("Can't add in this elem");
+                             
                             }
                             break;
                         default:
@@ -135,6 +124,13 @@ namespace Composite
                     my_tree[i].Display("\t "+i.ToString());
                 }
             }
+            public int All_Price()
+            {
+                int temp = 0;
+                foreach (var i in my_tree)
+                    temp += i.Price();
+                return temp;
+            }
         }
         static void Main(string[] args)
         {
@@ -146,7 +142,11 @@ namespace Composite
                 Console.WriteLine("Map in you tree");
                 my_tree.map_in_my_tree.ForEach(elem => { Console.Write(elem + " "); });
                 Console.Write("\n\n");
-                Console.Write("1.Go to the branch\n2.leave the branch\n3.Clear map\n4.Add\n5.Remove\n6.Exit\nYour chose:");
+                Console.Write("Type\n1 - Statistic, 2 - PC," +
+                    " 3 - Room, 4 - Table, 5 - Board" +
+                    " \n\n1.Go to the branch\n2.leave the branch" +
+                    "\n3.Clear map\n4.Add\n5.Remove" +
+                    "\n6.All price\n7.Exit\nYour chose:");
                 chose = Convert.ToInt32(Console.ReadLine());
                 if (chose==1)
                 {
@@ -177,6 +177,11 @@ namespace Composite
                     my_tree.Remove();
                 }
                 else if (chose == 6)
+                {
+                    Console.WriteLine("All price: {0}",my_tree.All_Price());
+                    Console.Read();
+                }
+                else if (chose == 7)
                 {
                     break;
                 }

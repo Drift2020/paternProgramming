@@ -28,6 +28,7 @@ namespace Composite
         void MyConsol(string str)
         {
             Console.WriteLine(str);
+         
         }
     }
 }

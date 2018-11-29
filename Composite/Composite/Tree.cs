@@ -58,10 +58,10 @@ namespace Composite
 
         public override void Add(Root Root, string[] elem)
         {
-            if (elem.Length == 1)
+            if (elem.Length == 1 && !(Root is PC))
                 Roots.Add(Root);
        
-            else
+            else if (elem.Length > 1)
             {
                 string[] temp = new string[elem.Length - 1];
                 Array.Copy(elem, 1, temp,0, elem.Length - 1);
@@ -238,10 +238,10 @@ namespace Composite
 
         public override void Add(Root Root, string[] elem)
         {
-            if (elem.Length == 1)
+            if (elem.Length == 1&& (Root is Statistic || Root is PC))
                 Roots.Add(Root);
 
-            else
+            else if (elem.Length > 1)
             {
                 string[] temp = new string[elem.Length - 1];
                 Array.Copy(elem, 1, temp, 0, elem.Length - 1);
@@ -348,16 +348,17 @@ namespace Composite
 
         public override void Add(Root Root, string[] elem)
         {
-            if (elem.Length == 1)
+            if (elem.Length == 1&& Root is Statistic)
                 Roots.Add(Root);
 
-            else
+            else if (elem.Length > 1)
             {
                 string[] temp = new string[elem.Length - 1];
                 Array.Copy(elem, 1, temp, 0, elem.Length - 1);
 
                 Roots[Convert.ToInt32(elem[1]) - 1].Add(Root, temp);
             }
+            
         }
 
         public override void Remove(string[] map_in_my_tree)
@@ -457,10 +458,10 @@ namespace Composite
 
         public override void Add(Root Root, string[] elem)
         {
-            if (elem.Length == 1)
+            if (elem.Length == 1 && Root is Statistic)
                 Roots.Add(Root);
 
-            else
+            else if (elem.Length > 1)
             {
                 string[] temp = new string[elem.Length - 1];
                 Array.Copy(elem, 1, temp, 0, elem.Length - 1);
