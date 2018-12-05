@@ -9,13 +9,14 @@ namespace My_info
 {
    public abstract class Info_PC
     {
+        public List<string> temp;
         public abstract string[] GetInfo();
     }
     public class Video_card : Info_PC
     {
         public override string[] GetInfo()
         {
-            List<string> temp = new List<string>();
+           temp = new List<string>();
             using (ManagementObjectSearcher searcher11 =
               new ManagementObjectSearcher("root\\CIMV2",
               "SELECT * FROM Win32_VideoController"))
@@ -40,7 +41,7 @@ namespace My_info
     {
         public override string[] GetInfo()
         {
-            List<string> temp = new List<string>();
+             temp = new List<string>();
             using (ManagementObjectSearcher searcher8 =
              new ManagementObjectSearcher("root\\CIMV2",
              "SELECT * FROM Win32_Processor"))
@@ -62,9 +63,10 @@ namespace My_info
     }
     public class HDD : Info_PC
     {
+     
         public override string[] GetInfo()
         {
-            List<string> temp = new List<string>();
+            temp = new List<string>();
             using (ManagementObjectSearcher searcher =
               new ManagementObjectSearcher("root\\CIMV2",
               "SELECT * FROM Win32_Volume"))

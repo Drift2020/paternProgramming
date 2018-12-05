@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Management;
+using System.Xml.Serialization;
 using My_info;
 namespace Bridge
 {
@@ -22,28 +24,84 @@ namespace Bridge
         {
            return info.GetInfo();
         }
-        public abstract string[] Operation();
+        public abstract void Operation();
     }
-    class Windows : PC
+    class ConsoleWrite : PC
     {
-        public Windows(Info_PC info) : base(info)
+        public ConsoleWrite(Info_PC info) : base(info)
         {
 
         }
      
         
-        public override string[] Operation()
+        public override void Operation()
         {
-            List<string> info_pc = new List<string>();
-            info_pc.Add(String.Format("Версия Windows: {0}", Environment.OSVersion));
-            info_pc.Add(String.Format("64 Bit операционная система? : {0}", Environment.Is64BitOperatingSystem ? "Да" : "Нет"));
-            info_pc.Add(String.Format("Имя компьютера : {0}", Environment.MachineName));
-            info_pc.Add("\n");
+          
+            Console.WriteLine(String.Format("Версия Windows: {0}", Environment.OSVersion));
+            Console.WriteLine(String.Format("64 Bit операционная система? : {0}", Environment.Is64BitOperatingSystem ? "Да" : "Нет"));
+            Console.WriteLine(String.Format("Имя компьютера : {0}", Environment.MachineName));
+            Console.WriteLine("\n");
 
            
         
 
-            return info_pc.ToArray();
+         
+        }
+
+    }
+
+    class FileWrite : PC
+    {
+        XmlSerializer formatter;
+        public FileWrite(Info_PC info) : base(info)
+        {
+
+        }
+
+
+        public override void Operation()
+        {
+            formatter = new XmlSerializer(typeof(List<string>));
+
+
+
+            List<string> temp=new List<string>();
+            temp.Add(String.Format("Версия Windows: {0}", Environment.OSVersion));
+            temp.Add(String.Format("64 Bit операционная система? : {0}", Environment.Is64BitOperatingSystem ? "Да" : "Нет"));
+            temp.Add(String.Format("Имя компьютера : {0}", Environment.MachineName));
+            temp.Add("\n");// получаем поток, куда будем записывать сериализованный объект
+            using (FileStream fs = new FileStream("persons.xml", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, temp);
+
+                Console.WriteLine("Объект сериализован");
+            }
+
+
+
+
+
+         
+        }
+        public override string[] PC_info()
+        {
+            formatter = new XmlSerializer(typeof(List<string>));
+          string[] temp = info.GetInfo();
+            List<string> tempL = new List<string>();
+
+            foreach (var i in temp)
+            {
+                tempL.Add(i);
+            }
+            // получаем поток, куда будем записывать сериализованный объект
+            using (FileStream fs = new FileStream("persons.xml", FileMode.Append))
+            {
+                formatter.Serialize(fs, tempL);
+
+                Console.WriteLine("Объект сериализован");
+            }
+
+            return new string[] { "0" };
         }
 
     }
@@ -54,7 +112,7 @@ namespace Bridge
         static void Main(string[] args)
         {
 
-            PC my_info = new Windows(new Video_card());
+            PC my_info = new FileWrite(new Video_card());
             while (true)
             {
 
@@ -69,21 +127,10 @@ namespace Bridge
                 else if (chose == 3)
                     my_info.Info = new HDD();
 
-                foreach (var y in my_info.Operation())
-                    {
-
-                      
-                            Console.WriteLine(y);
-                        
-
-                    }
+                my_info.Operation();
                 foreach (var y in my_info.PC_info())
                 {
-
-
                     Console.WriteLine(y);
-
-
                 }
             }
         }
