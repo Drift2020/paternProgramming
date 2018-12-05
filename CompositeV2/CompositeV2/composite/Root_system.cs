@@ -21,7 +21,7 @@ namespace CompositeV2.composite
             this.name = name;
             this.type = type;
         }
-
+      
         public string name;
         public int type;
         
