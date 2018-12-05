@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Composite
 {
 
-    abstract class Root
+    public abstract class Root
     {
         protected string poz_abc = "abcdefghijklmnopqrstuvwxyz";
         protected char poz_i = 'i';
@@ -45,7 +45,7 @@ namespace Composite
         - реализует относящиеся к управлению потомками операции в интерфейсе класса Root;
     */
 
-    class Room : Root
+   public class Room : Root
     {
         private List<Root> Roots = new List<Root>();
 
@@ -155,7 +155,7 @@ namespace Composite
     }
 
 
-    class Statistic : Root
+    public class Statistic : Root
     {
         public Statistic(string name, int price, AllMessage elem)
           : base(name, price, elem)
@@ -224,7 +224,7 @@ namespace Composite
         }
     }
 
-    class Table: Root
+    public class Table: Root
     {
 
         private List<Root> Roots = new List<Root>();
@@ -334,7 +334,7 @@ namespace Composite
         }
     }
 
-    class PC : Root
+    public class PC : Root
     {
 
         private List<Root> Roots = new List<Root>();
@@ -444,7 +444,7 @@ namespace Composite
             return temp;
         }
     }
-    class Board: Root
+    public class Board: Root
     {
 
         private List<Root> Roots = new List<Root>();
