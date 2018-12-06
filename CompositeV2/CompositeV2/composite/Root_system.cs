@@ -25,9 +25,10 @@ namespace CompositeV2.composite
         public string name;
         public int type;
         
-        public abstract void Add(Root_system c, string[] elem);
-      
+        public abstract void Add(Root_system c);
         public abstract void Display(string depth);
+        public abstract void Save(StreamWriter fstream,int nun);
+        public abstract void Load(StreamReader fstream);
     }
     [Serializable]
     public class Folder: Root_system
@@ -41,12 +42,40 @@ namespace CompositeV2.composite
         {
 
         }
-     
-        public override void Add(Root_system c, string[] elem)
+
+        public override void Add(Root_system Root)
         {
-            
+           
+                Roots.Add(Root);
+
         }
         public override void Display(string depth)
+        {
+
+        }
+        public override void Save(StreamWriter fstream, int nun)
+        {
+           
+            if (Roots.Count > 0)
+            {
+                string strN="";
+                for(int i = 0; i < nun; i++)
+                {
+                    strN = strN + "\t";
+                }
+                fstream.WriteLine(strN+"<folder readonly=\"" + type.ToString() + "\" name=\"" + name + "\">");
+
+                Roots.ForEach(x => { x.Save(fstream, nun + 1); });
+
+                fstream.WriteLine(strN + "</folder>");
+            }
+        
+            else
+            {
+                fstream.WriteLine("<folder readonly=\"" + type.ToString() + "\" name=\"" + name + "\"/>");
+            }
+        }
+        public override void Load(StreamReader fstream)
         {
 
         }
@@ -69,11 +98,24 @@ namespace CompositeV2.composite
             this.extension = extension;
         }
       
-        public override void Add(Root_system c, string[] elem)
+        public override void Add(Root_system c)
+        {
+            Console.Write("not");
+        }
+        public override void Display(string depth)
         {
 
         }
-        public override void Display(string depth)
+        public override void Save(StreamWriter fstream, int nun)
+        {
+            string strN = "";
+            for (int i = 0; i < nun; i++)
+            {
+                strN = strN + "\t";
+            }
+            fstream.WriteLine(strN + "<file readonly=\"" + type.ToString() + "\" name=\"" + name + "\" size=\""+size.ToString()+ "\" datacreation=\""+ datacreation.ToString()+ "\" extension=\""+ extension.ToString()+ "\"/>");
+        }
+        public override void Load(StreamReader fstream)
         {
 
         }
