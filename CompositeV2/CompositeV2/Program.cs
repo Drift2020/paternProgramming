@@ -10,14 +10,22 @@ namespace CompositeV2
 {
     class Program
     {
-        static void Folder(DirectoryInfo dir, Root_system folder)
+        static void Folder(DirectoryInfo dir, ref Root_system  folder)
         {
             foreach (var item in dir.GetDirectories())
             {
-                Console.WriteLine(item.Name);
-                Root_system temp = new Folder(item.Name, 0);
-                folder.Add(temp);              
-                
+                FileInfo files = new FileInfo(item.FullName);
+                Root_system temp = new Folder(item.Name, Convert.ToInt32(files.IsReadOnly));
+                folder.Add(temp);
+             
+            
+                Folder(item, ref temp);
+            }
+            foreach (var itemF in dir.GetFiles())
+            {
+                FileInfo file = new FileInfo(itemF.FullName);
+                Root_system tempF = new composite.File(itemF.Name, Convert.ToInt32(file.IsReadOnly), Convert.ToInt32(file.Length), file.CreationTime, Path.GetExtension(file.FullName));
+                folder.Add(tempF);
             }
         }
 
@@ -27,29 +35,23 @@ namespace CompositeV2
 
 
              
-            using (StreamWriter sw = new StreamWriter("my.txt", false, System.Text.Encoding.Default))
+            using (StreamWriter sw = new StreamWriter("my.xml", false, System.Text.Encoding.Default))
             {
          
-                string path = @"E:\sources\etwproviders\ru-ru";
+                string path = @"D:\ЕКО-16-П3\ADO.NET";
                 Console.Write("Enter your path:");
-                path = Console.ReadLine();
+               // path = Console.ReadLine();
                 DirectoryInfo dir = new DirectoryInfo(path);
                 Root_system folder = new Folder(dir.Name, 0);
+
+
+
+
+
+                Folder(dir, ref folder);
+
+
               
-         
-              
-
-               
-               
-
-                for (int y = 0; y < i + 1; y++)
-                {
-                    nowPATH += pathN[y] + "\\";
-                }
-                Root_system folderNow = new Folder(pathN[i], 0);
-
-
-                DirectoryInfo dir = new DirectoryInfo(nowPATH);
 
                     
                   
