@@ -67,12 +67,12 @@ namespace CompositeV2.composite
 
                 Roots.ForEach(x => { x.Save(fstream, nun + 1); });
 
-                fstream.WriteLine(strN + "</folder>");
+                fstream.WriteLine(strN + "</folder>", Encoding.ASCII);
             }
         
             else
             {
-                fstream.WriteLine("<folder readonly=\"" + type.ToString() + "\" name=\"" + name + "\"/>");
+                fstream.WriteLine("<folder readonly=\"" + type.ToString() + "\" name=\"" + name + "\"/>", Encoding.ASCII);
             }
         }
         public override void Load(StreamReader fstream)
@@ -113,7 +113,7 @@ namespace CompositeV2.composite
             {
                 strN = strN + "\t";
             }
-            fstream.WriteLine(strN + "<file readonly=\"" + type.ToString() + "\" name=\"" + name + "\" size=\""+size.ToString()+ "\" datacreation=\""+ datacreation.ToString()+ "\" extension=\""+ extension.ToString()+ "\"/>");
+            fstream.WriteLine(strN + "<file readonly=\"" + type.ToString() + "\" name=\"" + name + "\" size=\""+size.ToString()+ "\" datacreation=\""+ datacreation.ToString()+ "\" extension=\""+ extension.ToString()+ "\"/>", Encoding.ASCII);
         }
         public override void Load(StreamReader fstream)
         {
