@@ -29,7 +29,7 @@ namespace CompositeV2.composite
         public abstract void Add(Root_system c);
         public abstract void Display(string depth);
         public abstract void Save(StreamWriter fstream,int nun);
-        public abstract void Load(XDocument fstream);
+        public abstract void Load(XElement element);
     }
     [Serializable]
     public class Folder: Root_system
@@ -76,9 +76,10 @@ namespace CompositeV2.composite
                 fstream.WriteLine("<folder readonly=\"" + type.ToString() + "\" name=\"" + name + "\"/>", Encoding.ASCII);
             }
         }
-        public override void Load(XDocument fstream)
+        public override void Load(XElement element)
         {
-
+            this.name = element.Attribute("name").Value;
+            this.type =Convert.ToInt32(element.Attribute("readonly").Value);
         }
     }
     [Serializable]
@@ -116,9 +117,14 @@ namespace CompositeV2.composite
             }
             fstream.WriteLine(strN + "<file readonly=\"" + type.ToString() + "\" name=\"" + name + "\" size=\""+size.ToString()+ "\" datacreation=\""+ datacreation.ToString()+ "\" extension=\""+ extension.ToString()+ "\"/>", Encoding.ASCII);
         }
-        public override void Load(XDocument fstream)
+        public override void Load(XElement element)
         {
-
+            this.name = element.Attribute("name").Value;
+            this.type = Convert.ToInt32(element.Attribute("readonly").Value);
+            this.size= Convert.ToInt32(element.Attribute("size").Value);
+            this.datacreation =  DateTime.ParseExact(element.Attribute("datacreation").Value, "yyyy-MM-dd HH:mm:ss,fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            this.extension = element.Attribute("extension").Value;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace CompositeV2
                 folder.Add(tempF);
             }
         }
-        public static void Read(IEnumerable<XElement> doc,int num)
+        public static void Read(IEnumerable<XElement> doc,int num, Root_system folder1)
         {
             string strN = "";
             string strN1 = "";
@@ -46,24 +46,43 @@ namespace CompositeV2
 
             foreach (XElement el in doc)
             {
-               //  Console.WriteLine(strN+"{0}", el.Name);
+                //Console.WriteLine(strN+"{0}", el.Name);
                 Console.WriteLine(strN + "{0}", el.Attribute("name").Value);
                 //foreach (XAttribute attr in el.Attributes())
                 //    Console.WriteLine(strN + " Attributes   {0}", attr);
-
-               
+                Root_system temp = null;
+                if (el.Name == "folder")
+                {
+                    temp = new Folder();
+                    temp.Load(el);
+                }
+                else
+                {
+                    temp = new composite.File();
+                    temp.Load(el);
+                }
+                folder1.Add(temp);
 
                 foreach (XElement element in el.Elements())
                     if (element.Name == "folder")
                     {
-                         Console.WriteLine(strN1 + "{0}", element.Attribute("name").Value);
+                        Console.WriteLine(strN1 + "{0}", element.Attribute("name").Value);
                         //Console.WriteLine(strN + "{0}", element.Name);
                         //foreach (XAttribute attr in element.Attributes())
                         //    Console.WriteLine(strN + " Attributes   {0}", attr);
-                        Read(element.Elements(), num +2);
+
+                        temp = new Folder();
+                        temp.Load(element);
+
+                        Read(element.Elements(), num + 2, folder1);
                     }
-                else
+                    else
+                    {
                         Console.WriteLine(strN1 + "{0}", element.Attribute("name").Value);
+
+                        temp = new composite.File();
+                        temp.Load(el);
+                    }
 
 
             }
@@ -71,9 +90,10 @@ namespace CompositeV2
         static void Main(string[] args)
         {
 
+            Root_system folder1=null;
 
 
-             
+
             using (StreamWriter sw = new StreamWriter("my.xml", false, System.Text.Encoding.Default))
             {
          
@@ -94,8 +114,11 @@ namespace CompositeV2
             try
             {
                 XDocument doc = XDocument.Load("my.xml");
-                Read(doc.Root.Elements(),0);
-            }catch(Exception e)
+                Read(doc.Root.Elements(),0, folder1);
+
+                
+            }
+            catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
