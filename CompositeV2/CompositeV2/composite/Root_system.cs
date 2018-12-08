@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace CompositeV2.composite
@@ -28,7 +29,7 @@ namespace CompositeV2.composite
         public abstract void Add(Root_system c);
         public abstract void Display(string depth);
         public abstract void Save(StreamWriter fstream,int nun);
-        public abstract void Load(StreamReader fstream);
+        public abstract void Load(XDocument fstream);
     }
     [Serializable]
     public class Folder: Root_system
@@ -75,7 +76,7 @@ namespace CompositeV2.composite
                 fstream.WriteLine("<folder readonly=\"" + type.ToString() + "\" name=\"" + name + "\"/>", Encoding.ASCII);
             }
         }
-        public override void Load(StreamReader fstream)
+        public override void Load(XDocument fstream)
         {
 
         }
@@ -115,7 +116,7 @@ namespace CompositeV2.composite
             }
             fstream.WriteLine(strN + "<file readonly=\"" + type.ToString() + "\" name=\"" + name + "\" size=\""+size.ToString()+ "\" datacreation=\""+ datacreation.ToString()+ "\" extension=\""+ extension.ToString()+ "\"/>", Encoding.ASCII);
         }
-        public override void Load(StreamReader fstream)
+        public override void Load(XDocument fstream)
         {
 
         }
