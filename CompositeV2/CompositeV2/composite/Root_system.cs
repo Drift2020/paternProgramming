@@ -122,8 +122,7 @@ namespace CompositeV2.composite
             this.name = element.Attribute("name").Value;
             this.type = Convert.ToInt32(element.Attribute("readonly").Value);
             this.size= Convert.ToInt32(element.Attribute("size").Value);
-            this.datacreation =  DateTime.ParseExact(element.Attribute("datacreation").Value, "yyyy-MM-dd HH:mm:ss,fff",
-                                       System.Globalization.CultureInfo.InvariantCulture);
+            this.datacreation =  DateTime.Parse(element.Attribute("datacreation").Value);
             this.extension = element.Attribute("extension").Value;
         }
     }

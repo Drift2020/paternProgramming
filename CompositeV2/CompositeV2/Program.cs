@@ -55,6 +55,29 @@ namespace CompositeV2
                 {
                     temp = new Folder();
                     temp.Load(el);
+
+                    foreach (XElement element in el.Elements())
+                        if (element.Name == "folder")
+                        {
+                            Console.WriteLine(strN1 + "{0}", element.Attribute("name").Value);
+                            //Console.WriteLine(strN + "{0}", element.Name);
+                            //foreach (XAttribute attr in element.Attributes())
+                            //    Console.WriteLine(strN + " Attributes   {0}", attr);
+                            Root_system temp1 = null;
+                            temp1 = new Folder();
+                            temp1.Load(element);
+
+                            Read(element.Elements(), num + 2, folder1);
+                            temp.Add(temp1);
+                        }
+                        else
+                        {
+                            Console.WriteLine(strN1 + "{0}", element.Attribute("name").Value);
+                            Root_system temp1 = null;
+                            temp1 = new composite.File();
+                            temp1.Load(element);
+                            temp.Add(temp1);
+                        }
                 }
                 else
                 {
@@ -63,26 +86,7 @@ namespace CompositeV2
                 }
                 folder1.Add(temp);
 
-                foreach (XElement element in el.Elements())
-                    if (element.Name == "folder")
-                    {
-                        Console.WriteLine(strN1 + "{0}", element.Attribute("name").Value);
-                        //Console.WriteLine(strN + "{0}", element.Name);
-                        //foreach (XAttribute attr in element.Attributes())
-                        //    Console.WriteLine(strN + " Attributes   {0}", attr);
-
-                        temp = new Folder();
-                        temp.Load(element);
-
-                        Read(element.Elements(), num + 2, folder1);
-                    }
-                    else
-                    {
-                        Console.WriteLine(strN1 + "{0}", element.Attribute("name").Value);
-
-                        temp = new composite.File();
-                        temp.Load(el);
-                    }
+                
 
 
             }
@@ -96,24 +100,25 @@ namespace CompositeV2
 
             using (StreamWriter sw = new StreamWriter("my.xml", false, System.Text.Encoding.Default))
             {
-         
-                string path = @"C:\Users\Buje_jy89\Documents\GitHub\paternProgramming\CompositeV2\CompositeV2";
-             //   Console.Write("Enter your path:");
-               // path = Console.ReadLine();
+
+                string path = @"C:\Users\Mamory\Documents\GitHub\paternProgramming\ConsoleApp1";
+                Console.Write("Enter your path:");
+                path = Console.ReadLine();
                 DirectoryInfo dir = new DirectoryInfo(path);
                 Root_system folder = new Folder(dir.Name, 0);
 
                 Folder(dir, ref folder);
 
-               // sw.WriteLine("<?xml version=\""+1.0+"\" encoding=\"utf - 8\"?>");
+                // sw.WriteLine("<?xml version=\""+1.0+"\" encoding=\"utf - 8\"?>");
                 folder.Save(sw, 0);
 
-            
 
-            }
-            try
+
+             }
+                try
             {
                 XDocument doc = XDocument.Load("my.xml");
+                folder1 = new Folder(doc.Root.Attribute("name").Value, Convert.ToInt32(doc.Root.Attribute("readonly").Value));
                 Read(doc.Root.Elements(),0, folder1);
 
                 
