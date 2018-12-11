@@ -54,6 +54,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Up";
             this.button2.UseVisualStyleBackColor = true;
+       
             // 
             // button3
             // 
