@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button\BigButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Code\My_button.cs" />
     <Compile Include="Code\ConcreteObserver.cs" />
     <Compile Include="Code\Observer.cs" />

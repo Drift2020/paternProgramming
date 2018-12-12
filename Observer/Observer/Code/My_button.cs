@@ -3,33 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Observer.Code
 {
     class My_button : Subject
     {
-        Button obj;
-    
-        public My_button(Button obj)
+        int x=0;
+        int y=0;
+        public My_button(int x,int y)
         {
-            this.obj = obj;
+            this.x = x;
+            this.y = y;
         }
-        // Gets or sets subject state
+
         public int X
         {
-            get { return obj.Location.X; }
-            set { obj.Location = new System.Drawing.Point(value,obj.Location.Y); }
+            get { return x; }
+            set { x = value; }
         }
         public int Y
         {
-            get { return obj.Location.Y; }
-            set { obj.Location=new System.Drawing.Point(obj.Location.X, value); }
-        }
-        public string Text
-        {
-            get { return obj.Text; }
-            set { obj.Text = value; }
+            get { return y; }
+            set { y = value; }
         }
     }
 }
