@@ -57,6 +57,7 @@
     <Compile Include="Code\BindingErrorTraceListener.cs" />
     <Compile Include="Code\View_Model_Base.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
+    <Compile Include="Memento\Caretaker.cs" />
     <Compile Include="Memento\Memento.cs" />
     <Compile Include="Memento\My_text.cs" />
     <Compile Include="View_Model_Main.cs" />

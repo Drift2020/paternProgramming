@@ -23,20 +23,18 @@ namespace Memento
             }
         }
 
-        public Memento SaveMemento()
+        public Mementos SaveMemento()
         {
-            Console.WriteLine("\nСохранение состояния ...\n");
-            return new Memento(name, surname, phone, average);
+          
+            return new Mementos(text);
         }
 
         // Restores memento
-        public void RestoreMemento(Memento memento)
+        public void RestoreMemento(Mementos memento)
         {
-            Console.WriteLine("\nВосстановление состояния...\n");
-            this.Name = memento.Name;
-            this.Surname = memento.Surname;
-            this.Phone = memento.Phone;
-            this.Average = memento.Average;
+          
+            this.text = memento.Text;
+           
         }
     }
 }

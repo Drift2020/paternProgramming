@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Memento.Memento
+namespace Memento
 {
-    class Memento
+    class Mementos
     {
-        private string name;
+        private string text;
        
 
-        public Memento(string name)
+        public Mementos(string text)
         {
-            this.name = name;
+            this.text = text;
            
         }
 
         // Gets or sets name
-        public string Name
+        public string Text
         {
-            get { return name; }
-            set { name = value; }
+            get { return text; }
+            set { text = value; }
         }
 
     

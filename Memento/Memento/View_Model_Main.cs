@@ -13,12 +13,32 @@ namespace Memento
     class View_Model_Main:View_Model_Base
     {
         My_text my_t;
-
+        Caretaker my_history;
+        int now_index;
+        bool isCommand= true;
+        public View_Model_Main()
+        {
+            now_index = 1;
+            my_history = new Caretaker();
+            my_t = new My_text();
+            my_history.Add(my_t.SaveMemento());
+        }
         public string Text{
             set
             {
+                if(now_index<256)
+                now_index++;
+
+
+              
+              
                 my_t.Text= value;
+                if (isCommand)
+                    my_history.Add(my_t.SaveMemento());
+                else
+                    my_history.RemoveRange(now_index-1);
                 OnPropertyChanged(nameof(Text));
+                isCommand = true;
             }
             get
             {
@@ -42,12 +62,17 @@ namespace Memento
         }
         private void Execute_Undo(object o)
         {
-           
+
+            isCommand = false;
+            now_index--;
+            my_t.RestoreMemento(my_history[now_index-1]);
+            OnPropertyChanged(nameof(Text));
         }
         private bool CanExecute_Undo(object o)
         {
-           
+           if(now_index > 0 && my_history.Count>0)
                 return true;
+            return false;
           
         }
         #endregion Undo
@@ -67,13 +92,18 @@ namespace Memento
         }
         private void Execute_Redo(object o)
         {
-           
+            isCommand = false;
+            now_index++;
+            my_t.RestoreMemento(my_history[now_index-1]);
+            OnPropertyChanged(nameof(Text));
         }
         private bool CanExecute_Redo(object o)
         {
-            
+
+            if (now_index < my_history.Count)
                 return true;
-            
+            return false;
+
         }
         #endregion Redo
 

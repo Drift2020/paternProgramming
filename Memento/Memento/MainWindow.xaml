@@ -15,10 +15,10 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBox 
-                 TextWrapping="Wrap" Text="TextBox"  />
+                 TextWrapping="Wrap" Text="{Binding Text,  UpdateSourceTrigger=PropertyChanged ,Mode=TwoWay}"  />
         <WrapPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center">
-            <Button Content="Undo"/>
-            <Button Content="Redo"/>
+            <Button Command="{Binding Button_clik_Undo}" Content="Undo"/>
+            <Button Command="{Binding Button_clik_Redo}" Content="Redo"/>
         </WrapPanel>
 
     </Grid>
