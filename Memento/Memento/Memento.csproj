@@ -54,6 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Code\BindingErrorTraceListener.cs" />
+    <Compile Include="Code\View_Model_Base.cs" />
+    <Compile Include="Command\DelegateCommand.cs" />
+    <Compile Include="Memento\Memento.cs" />
+    <Compile Include="Memento\My_text.cs" />
     <Compile Include="View_Model_Main.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,5 +99,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
