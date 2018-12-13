@@ -46,6 +46,10 @@
     <Compile Include="Commander\GameCommand.cs" />
     <Compile Include="Commander\User.cs" />
     <Compile Include="Commander\ICommandGame.cs" />
+    <Compile Include="in\Allread.cs" />
+    <Compile Include="in\ConsoleRead.cs" />
+    <Compile Include="Out\AllMessage.cs" />
+    <Compile Include="Out\ConsoleWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
