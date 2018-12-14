@@ -14,7 +14,7 @@ namespace Interpreter
         {
             // Client - клиент: строит (или получает в готовом виде) абстрактное синтаксическое дерево, представляющее отдельное предложение на языке с данной грамматикой.
 
-            string roman = "CDXLXXXXV"; //"MMMCMXXVIII"; // MCMLXXXVIII  // MMMCMXCIX
+            string roman =  "CDLXXXV"; //"MMMCMXXVIII"; // MCMLXXXVIII  // MMMCMXCIX
             Context context = new Context(roman);
 
             
@@ -31,6 +31,29 @@ namespace Interpreter
             }
 
             Console.WriteLine("{0} = {1}", roman, context.Output);
+
+            // Wait for user
+            Console.ReadKey();
+
+
+
+            int arab = 485; //"CDXLXXXXV"; //"MMMCMXXVIII"; // MCMLXXXVIII  // MMMCMXCIX
+            ContextA contextA = new ContextA(arab);
+
+
+            List<ExpressionA> treeA = new List<ExpressionA>();
+            treeA.Add(new ThousandExpressionA());
+            treeA.Add(new HundredExpressionA());
+            treeA.Add(new TenExpressionA());
+            treeA.Add(new OneExpressionA());
+
+            // Interpret
+            foreach (ExpressionA exp in treeA)
+            {
+                exp.Interpret(contextA);
+            }
+
+            Console.WriteLine("{0} = {1}", arab, contextA.Output);
 
             // Wait for user
             Console.ReadKey();
@@ -142,13 +165,161 @@ namespace Interpreter
         public override int Multiplier() { return 1; }
     }
 
+    /// <summary>
+    /// //////////////////////////////////////////////////////////////////////////// 
+    /// </summary>
+    /// 
 
-    class OneExpressionA : Expression
+    class ContextA
     {
-        public override string One() { return "1"; }
-        public override string Four() { return "4"; }
-        public override string Five() { return "5"; }
-        public override string Nine() { return "9"; }
-        public override int Multiplier() { return 1; }
+        private  int input;
+        private string output;
+
+        // Constructor
+        public ContextA(int input)
+        {
+            this.input = input;
+        }
+
+        // Gets or sets input
+        public int Input
+        {
+            get { return input; }
+            set { input = value; }
+        }
+
+        // Gets or sets output
+        public string Output
+        {
+            get { return output; }
+            set { output = value; }
+        }
+    }
+
+
+
+    abstract class ExpressionA
+    {
+       protected string symbl;
+        public void Interpret(ContextA context)
+        {
+            if (context.Input <= 0)
+                return;
+
+            //   if (context.Input.StartsWith(Nine().ToString()))
+            if (context.Input / One() != 0 && context.Input / One() * One() >= Nine())
+            {
+                context.Output += (Multiplier());
+                context.Input = context.Input - Nine();
+            }
+            else if (context.Input / One() != 0 && context.Input / One() * One() >= Five())
+            {
+                context.Output += (Multiplier());
+                context.Input = context.Input - Five();
+            }
+            else if (context.Input / One() != 0 && context.Input / One()* One() >= Four())
+            {
+                context.Output += (Multiplier());
+                context.Input = context.Input - Four();
+            }
+          
+            
+            while (context.Input >= One() && context.Input / One() * One() >= One())
+            {
+                context.Output += ( Multiplier());
+                context.Input = context.Input - One(); 
+            }
+        }
+
+        public abstract int One();
+        public abstract int Four();
+        public abstract int Five();
+        public abstract int Nine();
+        public abstract string Multiplier();
+    }
+
+    class ThousandExpressionA : ExpressionA
+    {
+        public override int One()
+        {
+            symbl = "M";
+            return 1000;
+        }
+        public override int Four()
+        {
+            symbl = "";
+            return 0;
+        }
+        public override int Five()
+        {
+            symbl = "";
+            return 0;
+        }
+        public override int Nine()
+        {
+            symbl = "";
+            return 0;
+        }
+        public override string Multiplier() { return symbl; }
+    }
+
+    class HundredExpressionA : ExpressionA
+    {
+        public override int One()
+        {
+            symbl = "C";
+            return 100;
+        }
+        public override int Four()
+        {
+            symbl = "CD";
+            return 400;
+        }
+        public override int Five()
+        {
+            symbl = "D";
+            return 500;
+        }
+        public override int Nine()
+        {
+            symbl = "CM";
+            return 900;
+        }
+        public override string Multiplier() { return symbl; }
+    }
+
+    class TenExpressionA : ExpressionA
+    {
+        public override int One() {
+            symbl = "X";
+            return 10;
+        }
+        public override int Four() {
+            symbl = "XL";
+            return 40; }
+        public override int Five() {
+            symbl = "L";
+            return 50; }
+        public override int Nine() {
+            symbl = "XC";
+            return 90; }
+        public override string Multiplier() { return symbl; }
+    }
+
+    class OneExpressionA : ExpressionA
+    {
+        public override int One() {
+            symbl = "I";
+            return 1; }
+        public override int Four() {
+            symbl = "IV";
+            return 4; }
+        public override int Five() {
+            symbl = "V";
+            return 5; }
+        public override int Nine() {
+            symbl = "IX";
+            return 9; }
+        public override string Multiplier() { return symbl; }
     }
 }
